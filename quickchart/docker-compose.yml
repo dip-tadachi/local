@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  quickchart:
+    image: ianw/quickchart
+    container_name: quickchart
+    restart: always
+    environment:
+      - TZ=Asia/Tokyo
+      - VIRTUAL_HOST=quickchart.docker
+      - VIRTUAL_PORT=3400
+      - CERT_NAME=quickchart.docker
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  plantuml-server:
+    image: plantuml/plantuml-server:jetty
+    container_name: plantuml-server
+    restart: always
+    volumes:
+      - ./docker-entrypoint-custom.sh:/docker-entrypoint-custom.sh
+    entrypoint: /docker-entrypoint-custom.sh
+    environment:
+      - TZ=Asia/Tokyo
+      - VIRTUAL_HOST=www.plantuml.docker
+      - VIRTUAL_PORT=8080
+      - CERT_NAME=plantuml.docker
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

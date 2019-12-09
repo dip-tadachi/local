@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
+      - ./certs:/etc/nginx/certs:ro
+    environment:
+      - TZ=Asia/Tokyo
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
