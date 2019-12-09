@@ -2,11 +2,14 @@ version: '3'
 
 services:
   plantuml-server:
-    image: plantuml/plantuml-server:jetty
+#    image: plantuml/plantuml-server:jetty
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: plantuml-server
     restart: always
-    volumes:
-      - ./docker-entrypoint-custom.sh:/docker-entrypoint-custom.sh
+#    volumes:
+#      - ./docker-entrypoint-custom.sh:/docker-entrypoint-custom.sh
     entrypoint: /docker-entrypoint-custom.sh
     environment:
       - TZ=Asia/Tokyo
